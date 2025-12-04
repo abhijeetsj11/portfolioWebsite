@@ -7,7 +7,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#home" class="brand">Abhijeet Singh Jhala</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" aria-pressed="false">
+                    <span class="theme-icon" aria-hidden="true">🌙</span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <div id="particles-js"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="title">Hi, I'm <span class="highlight">Abhijeet Singh Jhala</span></h1>
+                    <h2 class="typed-text">I'm a <span id="typed"></span></h2>
+                    <p class="description">I craft high-performance digital experiences that look great and work even better.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="primary-btn">View My Work</a>
+                        <a href="assets/Resume.pdf" download class="secondary-btn">
+                            <i class="fas fa-download"></i> Resume
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <img src="assets/img.jpeg" alt="Abhijeet Singh Jhala" class="profile-img">
+                        <div class="blob-animation"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 <script src="script.js"></script>
 </html>
