@@ -187,14 +187,30 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 /* Footer styles */
 .footer{background:var(--nav-bg);color:var(--nav-text);padding:2.5rem 0;border-top:1px solid rgba(255,255,255,0.03)}
 .footer .container{max-width:1100px;margin:0 auto;padding:0 1rem}
-.footer-content{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:start}
-.footer-logo h3{margin:0;font-size:1.15rem}
-.footer-logo p{color:var(--muted)}
-.footer-links ul{list-style:none;padding-left:0}
-.footer-links a{color:var(--link);text-decoration:none}
-.footer-contact p{margin:0.25rem 0;color:var(--muted)}
-.footer-social .social-links{display:flex;gap:0.5rem}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;border-top:1px solid rgba(255,255,255,0.03);padding-top:0.8rem;color:var(--muted);font-size:0.95rem}
+
+/* New footer layout */
+.site-footer{background:var(--nav-bg);color:var(--nav-text);padding:2.5rem 0}
+.site-footer .container{max-width:1100px;margin:0 auto;padding:0 1rem}
+.footer-top .footer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;align-items:start}
+.footer-left .footer-title{font-size:1.15rem;margin:0 0 0.25rem}
+.footer-left .footer-sub,.footer-left .footer-subsub{margin:0;color:var(--muted)}
+.footer-quicklinks ul,.footer-quicklinks ul li{list-style:none;padding:0;margin:0}
+.footer-quicklinks a{color:var(--link);text-decoration:none}
+.footer-heading{margin:0 0 0.5rem;font-weight:700}
+.footer-contact-me p{margin:0.25rem 0;color:var(--muted)}
+.social-icons{display:flex;gap:0.5rem}
+.social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--nav-text);text-decoration:none}
+
+.footer-bottom{display:flex;flex-direction:column;align-items:center;gap:0.25rem;margin-top:1.25rem;border-top:1px solid rgba(255,255,255,0.03);padding-top:0.8rem;color:var(--muted);font-size:0.95rem}
+.footer-copy,.footer-credit{margin:0}
+
+@media (max-width:1000px){
+	.footer-top .footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+	.footer-top .footer-grid{grid-template-columns:1fr}
+	.social-icons a{width:36px;height:36px}
+}
 
 /* Back-to-top button */
 .back-to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:8px;background:var(--accent);color:#fff;border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(74,114,236,0.18);transform:translateY(0);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
