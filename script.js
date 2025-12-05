@@ -183,3 +183,78 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	})();
 
+// Scroll-based active section highlighting using IntersectionObserver
+(function () {
+	const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+	const sections = Array.from(document.querySelectorAll('section[id]'));
+	if (!navLinks.length || !sections.length) return;
+
+	// helper: remove active from all links
+	function clearActive() {
+		navLinks.forEach(l => l.classList.remove('active'));
+	}
+
+	// when a nav link is clicked, make it active immediately (improves perceived responsiveness)
+	navLinks.forEach(link => {
+		link.addEventListener('click', () => {
+			clearActive();
+			link.classList.add('active');
+		});
+	});
+
+	// Map section id to link element for quick lookup
+	function linkForSectionId(id) {
+		return document.querySelector('.nav-links a[href="#' + id + '"]');
+	}
+
+	// IntersectionObserver callback: pick the entry with largest intersectionRatio
+	const observer = new IntersectionObserver((entries) => {
+		let best = null;
+		entries.forEach(entry => {
+			if (!best || entry.intersectionRatio > best.intersectionRatio) best = entry;
+		});
+
+		if (best && best.isIntersecting) {
+			const id = best.target.id;
+			const link = linkForSectionId(id);
+			if (link) {
+				clearActive();
+				link.classList.add('active');
+			}
+		} else {
+			// If no section is intersecting enough, clear active states
+			// (this keeps UI predictable when scrolling fast)
+			// but don't clear if a link has focus (keyboard nav)
+			const focused = document.activeElement;
+			if (!focused || !focused.closest || !focused.closest('.nav-links')) {
+				clearActive();
+			}
+		}
+	}, {
+		root: null,
+		rootMargin: '-30% 0% -40% 0%',
+		threshold: [0.25, 0.5, 0.75]
+	});
+
+	sections.forEach(s => observer.observe(s));
+
+	// Initial check: highlight the section in view on load
+	window.addEventListener('load', function () {
+		// give the observer a tick; fallback: find section nearest viewport center
+		setTimeout(() => {
+			const inView = sections.map(s => ({
+				id: s.id,
+				rect: s.getBoundingClientRect(),
+				distance: Math.abs((s.getBoundingClientRect().top + s.getBoundingClientRect().bottom) / 2 - (window.innerHeight / 2))
+			})).sort((a,b) => a.distance - b.distance);
+			if (inView.length) {
+				const link = linkForSectionId(inView[0].id);
+				if (link) {
+					clearActive();
+					link.classList.add('active');
+				}
+			}
+		}, 50);
+	});
+})();
+
