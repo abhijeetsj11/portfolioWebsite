@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const typedEl = document.getElementById('typed');
 		if (!typedEl) return;
 
-		const words = ['Web Developer', 'UI/UX Designer (animation)'];
+		const words = ['Web Developer', 'UI/UX Designer'];
 		const TYPING_SPEED = 80;
 		const PAUSE = 1500;
 		let wordIndex = 0;
