@@ -109,3 +109,82 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	})();
 
+	/* Contact form handling */
+	(function () {
+		const form = document.getElementById('contact-form');
+		if (!form) return;
+
+		const submitBtn = form.querySelector('.submit-btn');
+		const msgEl = document.createElement('div');
+		msgEl.className = 'form-message';
+		form.appendChild(msgEl);
+
+		form.addEventListener('submit', async function (e) {
+			e.preventDefault();
+
+			// basic validation
+			const name = form.querySelector('#name');
+			const email = form.querySelector('#email');
+			const message = form.querySelector('#message');
+			if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+				msgEl.textContent = 'Please fill in the required fields.';
+				msgEl.className = 'form-message error';
+				return;
+			}
+
+			// prepare submit
+			submitBtn.disabled = true;
+			const originalText = submitBtn.textContent;
+			submitBtn.querySelector('span') ? submitBtn.querySelector('span').textContent = 'Sending...' : submitBtn.textContent = 'Sending...';
+
+			try {
+				const action = form.getAttribute('action') || window.location.href;
+				const formData = new FormData(form);
+				const res = await fetch(action, {
+					method: form.getAttribute('method') || 'POST',
+					body: formData,
+					headers: { 'Accept': 'application/json' }
+				});
+
+				if (res.ok) {
+					msgEl.textContent = 'Message sent — thanks!';
+					msgEl.className = 'form-message success';
+					form.reset();
+				} else {
+					const data = await res.json().catch(() => ({}));
+					msgEl.textContent = data.error || 'There was an error sending your message.';
+					msgEl.className = 'form-message error';
+				}
+			} catch (err) {
+				msgEl.textContent = 'Network error. Please try again later.';
+				msgEl.className = 'form-message error';
+			} finally {
+				submitBtn.disabled = false;
+				if (submitBtn.querySelector('span')) submitBtn.querySelector('span').textContent = 'Send Message';
+				else submitBtn.textContent = originalText;
+			}
+		});
+	})();
+
+	/* Footer helpers: set current year and back-to-top button */
+	(function () {
+		// current year
+		const yearEl = document.getElementById('currentYear');
+		if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+		// back to top
+		const backBtn = document.getElementById('backToTop');
+		if (!backBtn) return;
+
+		function onScroll() {
+			if (window.scrollY > 400) backBtn.classList.add('show');
+			else backBtn.classList.remove('show');
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+
+		backBtn.addEventListener('click', function () {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+	})();
+
