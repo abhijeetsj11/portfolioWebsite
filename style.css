@@ -113,13 +113,19 @@ body{background:var(--bg);color:var(--text)}
 @media (max-width:760px){
 	.nav-toggle{display:block}
 	.theme-toggle{display:inline-flex;align-items:center;justify-content:center}
+
+	/* Fix navbar to top on mobile so it remains visible while scrolling */
+	.navbar{position:fixed;top:0;left:0;right:0;height:var(--navbar-height);z-index:12050}
+	.nav-container{height:var(--navbar-height)}
+	/* ensure page content is pushed below the fixed mobile navbar */
+	main{margin-top:calc(var(--navbar-height) + 8px)}
 	.nav-links{position:fixed;top:var(--navbar-height);right:0;left:auto;background:var(--nav-bg);flex-direction:column;align-items:flex-start;padding:0.5rem;border-left:1px solid rgba(255,255,255,0.03);gap:0;width:min(86vw,260px);transform:translateX(110%);max-height:calc(100dvh - var(--navbar-height));height:calc(100dvh - var(--navbar-height));overflow:auto;transition:transform .25s ease,opacity .18s ease;z-index:12060;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom)}
 	.nav-links.open{transform:translateX(0)}
 	.nav-links li{width:100%}
 	.nav-links li a{width:100%;padding:0.85rem 1rem}
 
 	/* When nav is open, prevent background scrolling and show an overlay to block interactions */
-	body.nav-open{overflow:hidden;position:fixed;}
+	body.nav-open{overflow:hidden;position:relative;}
 	html.nav-open,body.nav-open{overflow-x:hidden}
 	body.nav-open::before{content:"";position:fixed;inset:0;background:rgba(2,6,23,0.36);z-index:12020;opacity:0;transition:opacity .25s}
 	body.nav-open .nav-links{transform:translateX(0)}
