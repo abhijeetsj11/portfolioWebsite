@@ -7,15 +7,30 @@ document.addEventListener('DOMContentLoaded', function () {
 		toggle.addEventListener('click', function () {
 			const opened = nav.classList.toggle('open');
 			toggle.setAttribute('aria-expanded', opened);
+			// lock body scroll and show overlay on mobile when nav is open
+			document.body.classList.toggle('nav-open', opened);
 		});
 
 		// Close menu when a link is clicked (mobile)
 		nav.querySelectorAll('a').forEach(link => {
 			link.addEventListener('click', () => {
 				nav.classList.remove('open');
+				document.body.classList.remove('nav-open');
 				toggle.setAttribute('aria-expanded', 'false');
 			});
 		});
+
+		// Close nav when clicking outside the menu (mobile). This also closes overlay.
+		document.addEventListener('click', function (e) {
+			if (!nav.classList.contains('open')) return;
+			const clickedInsideNav = e.target.closest && e.target.closest('.nav-links');
+			const clickedToggle = e.target.closest && e.target.closest('#navToggle');
+			if (!clickedInsideNav && !clickedToggle) {
+				nav.classList.remove('open');
+				document.body.classList.remove('nav-open');
+				toggle.setAttribute('aria-expanded', 'false');
+			}
+		}, {capture: true});
 	}
 
 	// Theme toggle with persistence
