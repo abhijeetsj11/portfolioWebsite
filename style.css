@@ -3,25 +3,51 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
 
-/* Theme variables (light by default) */
+/* Color system: Light mode variables and dark mode override using data-theme attribute */
 :root{
-	--bg:#f7f9fc;
-	--text:#0b1220;
-	--muted:#5b6b7a;
-	--nav-bg:#0b1220;
-	--nav-text:#ffffff;
-	--link:#cfe3ff;
-	--accent:#7aa2ff;
+	/* LIGHT MODE */
+	--background: #F8F7F4; /* page background */
+	--card-bg: #FAF9F6; /* cards */
+	--secondary-bg: #F1EDE4; /* section secondary bg */
+	--primary: #2A4DFF; /* primary color */
+	--accent: #72B7FF; /* accent */
+	--subtle-blue: #D4E4F4; /* subtle blue */
+	--contrast: #8A1538; /* contrast */
+	--text-primary: #1F1F1F; /* main text */
+	--text-secondary: #4A4A4A; /* secondary text */
+
+	/* Derived / legacy aliases used across the stylesheet */
+	--bg: var(--background);
+	--card-bg-alt: var(--card-bg);
+	--secondary: var(--secondary-bg);
+	--text: var(--text-primary);
+	--muted: var(--text-secondary);
+	--nav-bg: var(--secondary-bg);
+	--nav-text: var(--text-primary);
+	--link: var(--accent);
+	--card-border: rgba(0,0,0,0.06);
 }
-/* Dark theme overrides */
-:root.dark{
-	--bg:#071022;
-	--text:#e6eef9;
-	--muted:#9fb6d6;
-	--nav-bg:#071022;
-	--nav-text:#e6eef9;
-	--link:#9fc9ff;
-	--accent:#4b8ef3;
+
+/* DARK MODE */
+[data-theme="dark"]{
+	--background: #0A0F1F;
+	--secondary-bg: #111A2E;
+	--card-bg: #162238;
+	--primary: #3D8BFF; /* accent glow as primary in dark */
+	--accent: #5AB4FF; /* soft neon */
+	--subtle-blue: #7FA6C9;
+	--contrast: #8A1538; /* keep same if needed */
+	--text-primary: #E8ECF2;
+	--text-secondary: #A8B2C3;
+
+	/* Derived aliases */
+	--bg: var(--background);
+	--text: var(--text-primary);
+	--muted: var(--text-secondary);
+	--nav-bg: var(--secondary-bg);
+	--nav-text: var(--text-primary);
+	--link: var(--accent);
+	--card-border: rgba(255,255,255,0.04);
 }
 
 body{background:var(--bg);color:var(--text)}
@@ -76,8 +102,8 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 .typed-text{font-size:1.25rem;color:var(--muted);margin-bottom:1rem}
 .description{color:var(--muted);margin-bottom:1.25rem;max-width:56ch}
 .hero-buttons{display:flex;gap:0.75rem;flex-wrap:wrap}
-.primary-btn{background:var(--accent);color:#fff;padding:0.6rem 1rem;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(74,114,236,0.18)}
-.secondary-btn{background:transparent;color:var(--text);padding:0.55rem 0.9rem;border-radius:8px;text-decoration:none;border:1px solid rgba(11,18,32,0.06)}
+.primary-btn{background:var(--primary);color:#fff;padding:0.6rem 1rem;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(42,77,255,0.12)}
+.secondary-btn{background:transparent;color:var(--text);padding:0.55rem 0.9rem;border-radius:8px;text-decoration:none;border:1px solid var(--card-border)}
 .primary-btn:hover{filter:brightness(.98)}
 
 .hero-image{flex:0 0 360px;display:flex;align-items:center;justify-content:center}
@@ -173,7 +199,7 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 .form-group label{font-size:0.95rem;margin-bottom:0.35rem}
 .form-group input,.form-group textarea{padding:0.6rem 0.75rem;border-radius:8px;border:1px solid rgba(11,18,32,0.06);background:transparent;color:var(--text);resize:vertical}
 .form-group textarea{min-height:120px}
-.submit-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1rem;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
+.submit-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1rem;border-radius:10px;border:0;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
 .submit-btn:disabled{opacity:0.6;cursor:wait}
 
 .form-message{margin-top:0.75rem;font-weight:600}
@@ -218,9 +244,9 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 .projects-container .section-heading{margin-bottom:1rem}
 .projects-list{display:flex;flex-direction:column;gap:1rem}
 
-.project-card{display:flex;gap:1.25rem;align-items:stretch;padding:1rem;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 8px 30px rgba(2,6,23,0.06);transition:transform .25s ease,box-shadow .25s ease}
+.project-card{display:flex;gap:1.25rem;align-items:stretch;padding:1rem;border-radius:14px;background:var(--card-bg);border:1px solid var(--card-border);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 8px 30px rgba(2,6,23,0.06);transition:transform .25s ease,box-shadow .25s ease}
 .project-media{flex:0 0 180px;display:flex;align-items:center;justify-content:center}
-.project-placeholder{width:160px;height:120px;border-radius:10px;border:1px dashed rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+.project-placeholder{width:160px;height:120px;border-radius:10px;border:1px dashed var(--card-border);display:flex;align-items:center;justify-content:center;color:var(--muted);background:var(--secondary-bg)}
 .project-body{flex:1;display:flex;flex-direction:column;justify-content:space-between}
 .project-title{margin:0 0 0.5rem;font-size:1.05rem}
 .project-desc{margin:0 0 0.75rem;color:var(--muted)}

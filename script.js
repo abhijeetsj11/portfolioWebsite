@@ -24,15 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	const THEME_KEY = 'site-theme';
 
 	function applyTheme(theme) {
-		if (theme === 'dark') {
-			root.classList.add('dark');
-			themeToggle && themeToggle.setAttribute('aria-pressed', 'true');
-			if (themeToggle) themeToggle.querySelector('.theme-icon').textContent = '☀️';
-		} else {
-			root.classList.remove('dark');
-			themeToggle && themeToggle.setAttribute('aria-pressed', 'false');
-			if (themeToggle) themeToggle.querySelector('.theme-icon').textContent = '🌙';
-		}
+		// set data-theme attribute on the <html> element
+		root.setAttribute('data-theme', theme);
+		if (themeToggle) themeToggle.setAttribute('aria-pressed', theme === 'dark');
+		if (themeToggle) themeToggle.querySelector('.theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
 	}
 
 	// Initialize theme from localStorage or system preference
@@ -47,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	if (themeToggle) {
 		themeToggle.addEventListener('click', function () {
-			const isDark = root.classList.contains('dark');
-			const next = isDark ? 'light' : 'dark';
+			const current = root.getAttribute('data-theme') || 'light';
+			const next = current === 'dark' ? 'light' : 'dark';
 			try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
 			applyTheme(next);
 		});
