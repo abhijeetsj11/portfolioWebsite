@@ -269,15 +269,31 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 /* New footer layout */
 .site-footer{background:var(--nav-bg);color:var(--nav-text);padding:2.5rem 0}
 .site-footer .container{max-width:1100px;margin:0 auto;padding:0 1rem}
-.footer-top .footer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;align-items:start}
-.footer-left .footer-title{font-size:1.15rem;margin:0 0 0.25rem}
-.footer-left .footer-sub,.footer-left .footer-subsub{margin:0;color:var(--muted)}
-.footer-quicklinks ul,.footer-quicklinks ul li{list-style:none;padding:0;margin:0}
-.footer-quicklinks a{color:var(--link);text-decoration:none}
-.footer-heading{margin:0 0 0.5rem;font-weight:700}
-.footer-contact-me p{margin:0.25rem 0;color:var(--muted)}
-.social-icons{display:flex;gap:0.5rem}
-.social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--nav-text);text-decoration:none}
+.footer-top .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;align-items:start}
+
+/* Make each footer column visually consistent */
+.footer-left,.footer-quicklinks,.footer-contact-me,.footer-social{padding:0.15rem 0}
+
+.footer-left .footer-title{font-size:1.2rem;margin:0 0 0.5rem;font-weight:800;color:var(--primary)}
+.footer-left .footer-sub,.footer-left .footer-subsub{margin:0;color:var(--muted);font-size:0.95rem}
+
+.footer-quicklinks .footer-heading{margin:0 0 0.5rem;font-weight:700}
+.footer-quicklinks ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem}
+.footer-quicklinks a{color:var(--text);text-decoration:none;opacity:0.95;transition:color .18s ease}
+.footer-quicklinks a:hover{color:var(--primary)}
+
+.footer-contact-me .footer-heading{margin:0 0 0.5rem;font-weight:700}
+.footer-contact-me p{display:flex;align-items:center;gap:0.6rem;margin:0.5rem 0;color:var(--muted)}
+.footer-contact-me p a{color:var(--text);text-decoration:none}
+.footer-contact-me i{width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02);color:var(--accent)}
+
+.footer-social .footer-heading{margin:0 0 0.5rem;font-weight:700}
+.footer-social .social-icons{display:flex;gap:0.6rem;align-items:center}
+.footer-social .social-icons a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.02);color:var(--nav-text);text-decoration:none;transition:box-shadow .18s ease,transform .18s ease}
+.footer-social .social-icons a:hover{box-shadow:0 10px 26px color-mix(in srgb, var(--primary) 14%, transparent);transform:translateY(-3px)}
+
+.footer-underline{width:48px;height:4px;background:var(--accent);border-radius:3px;margin:8px 0 12px}
+
 
 /* Ensure inline SVG icons (like X) inherit color and size consistently */
 .social-icons a svg, .social-links-contact a svg {display:block;width:20px;height:20px;fill:currentColor;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round}
