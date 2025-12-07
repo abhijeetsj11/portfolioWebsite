@@ -279,6 +279,9 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 .social-icons{display:flex;gap:0.5rem}
 .social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--nav-text);text-decoration:none}
 
+/* Ensure inline SVG icons (like X) inherit color and size consistently */
+.social-icons a svg, .social-links-contact a svg {display:block;width:20px;height:20px;fill:currentColor;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round}
+
 .footer-bottom{display:flex;flex-direction:column;align-items:center;gap:0.25rem;margin-top:1.25rem;border-top:1px solid rgba(255,255,255,0.03);padding-top:0.8rem;color:var(--muted);font-size:0.95rem}
 .footer-copy,.footer-credit{margin:0}
 
