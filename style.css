@@ -103,6 +103,24 @@ body{background:var(--bg);color:var(--text)}
 	main{margin-top:calc(var(--navbar-height) + 8px)}
 }
 
+/* Desktop-only alignment tweaks (1024px+) - do not change mobile layout */
+@media (min-width:1024px){
+	/* ensure container is a positioned parent for absolute placement */
+	.nav-container{position:relative;padding-left:1rem;padding-right:1rem}
+
+	/* Brand: slightly bolder and padded from the left */
+	.brand{font-weight:800;padding-left:8px}
+
+	/* Hide hamburger on desktop (no change to mobile) and keep theme-toggle at far-right */
+	.nav-toggle{display:none}
+
+	/* Reserve space so nav-links don't collide with the theme toggle */
+	.nav-links{margin-right:80px}
+
+	/* Place theme toggle at the far right and vertically center it with the nav items */
+	.theme-toggle{position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:12200}
+}
+
 /* Reduced motion: respect user preferences */
 @media (prefers-reduced-motion: reduce){
 	.navbar,.nav-links li a::after,.skill-card,.project-card{transition:none !important;animation:none !important}
@@ -113,6 +131,12 @@ body{background:var(--bg);color:var(--text)}
 @media (max-width:760px){
 	.nav-toggle{display:block}
 	.theme-toggle{display:inline-flex;align-items:center;justify-content:center}
+
+	/* Mobile-only: position the hamburger at the extreme right and theme toggle just left of it.
+	   Keep the brand exactly as-is (do not modify .brand) */
+	.nav-container{position:relative}
+	.nav-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:12100;margin-right:0}
+	.theme-toggle{position:absolute;right:56px;top:50%;transform:translateY(-50%);z-index:12100;margin-right:0}
 
 	/* Fix navbar to top on mobile so it remains visible while scrolling */
 	.navbar{position:fixed;top:0;left:0;right:0;height:var(--navbar-height);z-index:12050}
