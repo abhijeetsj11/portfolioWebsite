@@ -355,6 +355,14 @@ main{max-width:1100px;margin:2rem auto;padding:0 1rem}
 /* Hover effect: subtle scale and stronger shadow (no color changes) */
 .project-card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 26px 60px rgba(2,6,23,0.12)}
 
+/* See All Button */
+.see-all-container{display:flex;justify-content:center;margin-top:2rem}
+.see-all-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;color:var(--text);background:transparent;border:1px solid var(--card-border);transition:transform .25s ease,box-shadow .25s ease}
+[data-theme="dark"] .see-all-btn{color:#fff}
+.see-all-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(2,6,23,0.1)}
+.see-all-btn i{font-size:0.9rem;transition:transform .25s ease}
+.see-all-btn:hover i{transform:translateX(4px)}
+
 /* Responsive: stack image above text on small screens */
 @media (max-width:900px){
 	.project-card{flex-direction:column}
